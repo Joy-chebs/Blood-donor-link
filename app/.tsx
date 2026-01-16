@@ -22,10 +22,10 @@ export default function Home() {
                   Become a Donor
                 </Button>
               </Link>
-              <Link href="/find-donors">
+              <Link href="/requests">
                 <Button size="lg" variant="outline" className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-red-600 text-lg px-8 py-6">
                   <AlertCircle className="mr-2 h-5 w-5" />
-                  Find donors
+                  Request Blood
                 </Button>
               </Link>
             </div>

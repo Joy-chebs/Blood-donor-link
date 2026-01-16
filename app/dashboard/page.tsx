@@ -6,13 +6,22 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Users, AlertCircle, Droplet, Calendar, TrendingUp, Heart } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 
+type BloodRequest = {
+  id: string;
+  blood_type: string;
+  patient_name: string;
+  hospital_name: string;
+  urgency: 'critical' | 'urgent' | 'normal';
+  units_needed: number;
+};
+
 type Stats = {
   totalDonors: number;
   availableDonors: number;
   activeRequests: number;
   totalDonations: number;
   donorsByBloodType: { blood_type: string; count: number }[];
-  recentRequests: unknown[];
+  recentRequests: BloodRequest[];
 };
 
 export default function DashboardPage() {
