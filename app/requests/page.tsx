@@ -9,12 +9,12 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
-import { useToast } from '@/hooks/use-toast';
+import { toast } from "sonner"
 import { supabase, type BloodRequest } from '@/lib/supabase';
 import { AlertCircle, Plus, Droplet, MapPin, Phone, Mail, Hospital } from 'lucide-react';
 
 export default function RequestsPage() {
-  const { toast } = useToast();
+  // const { toast } = useToast();
   const [requests, setRequests] = useState<BloodRequest[]>([]);
   const [loading, setLoading] = useState(true);
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -65,10 +65,7 @@ export default function RequestsPage() {
 
       if (error) throw error;
 
-      toast({
-        title: 'Request Created!',
-        description: 'Your blood request has been posted successfully.',
-      });
+      toast.success('Your blood request has been posted successfully.');
 
       setDialogOpen(false);
       setFormData({
@@ -86,11 +83,7 @@ export default function RequestsPage() {
       fetchRequests();
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      toast({
-        title: 'Request Failed',
-        description: error.message || 'Something went wrong. Please try again.',
-        variant: 'destructive',
-      });
+      toast.error(error.message || 'Something went wrong. Please try again.');
     } finally {
       setSubmitting(false);
     }

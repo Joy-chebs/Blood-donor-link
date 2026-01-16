@@ -19,13 +19,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useToast } from "@/hooks/use-toast";
+// import { useToast } from "@/hooks/use-toast";
+import {toast} from "sonner"
 import { supabase } from "@/lib/supabase";
 import { Heart } from "lucide-react";
 
 export default function RegisterPage() {
   const router = useRouter();
-  const { toast } = useToast();
+  // const { toast } = useToast();
   const [loading, setLoading] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -48,11 +49,7 @@ export default function RegisterPage() {
     // ✅ CLIENT-SIDE VALIDATION (IMPORTANT)
     for (const [key, value] of Object.entries(formData)) {
       if (!value) {
-        toast({
-          title: "Missing field",
-          description: `Please fill in ${key.replace("_", " ")}`,
-          variant: "destructive",
-        });
+        toast.error(`Please fill in ${key.replace("_", " ")}`);
         return;
       }
     }
@@ -64,18 +61,15 @@ export default function RegisterPage() {
 
       if (error) throw error;
 
-      toast({
-        title: "Registration Successful 🎉",
+      toast.success("Registration Successful 🎉", {
         description: "Redirecting to dashboard...",
       });
 
       // ✅ GUARANTEED NAVIGATION
       router.replace("/dashboard");
     } catch (error: any) {
-      toast({
-        title: "Registration Failed",
+      toast.error("Registration Failed", {
         description: error.message || "Something went wrong",
-        variant: "destructive",
       });
     } finally {
       setLoading(false);
